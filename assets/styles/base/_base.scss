@@ -1,0 +1,31 @@
+@use "../abstracts/variables" as variable;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: variable.$font-primary;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+h1 {
+    font-family: variable.$font-title;
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-top: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
