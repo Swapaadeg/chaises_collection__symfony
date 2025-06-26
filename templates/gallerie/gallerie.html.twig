@@ -3,5 +3,30 @@
 {% block title %}Galerie{% endblock %}
 
 {% block body %}
+    <h2>Galerie de nos chaises</h2>
+    <div class="chaises-container">
+        {% for chaise in chaises %}
+            <div class="chaise-card">
+                <h2>{{ chaise.nom }}</h2>
+                {% set desc = chaise.description %}
+                <p class="description">
+                    {{ desc|length > 20 ? desc|slice(0, 250) ~ '...' : desc }}
+                </p>
+                <p class="type">Type : {{ chaise.type.nom }}</p>
+                <a href="{{ path('chaise', { id: chaise.id }) }}">Voir plus</a>
+                {% if chaise.imageName %}
+                    <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="Image de {{ chaise.nom }}" class="chaise-image">
+                {% endif %}
 
+                {# <div class="card-actions">
+                    <a class="modify-a" href="{{ path('modify_chaise', { id: chaise.id }) }}">Modifier</a>
+                    <form class="form-delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_chaise', { id: chaise.id }) }}">
+                        <input type="hidden" name="_method" value="delete">
+                        <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ chaise.id) }}">
+                        <button class="delete-btn" type="submit">Supprimer</button>
+                    </form>
+                </div> #}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ chaise.nom }}{% endblock %}
+
+{% block body %}
+    <h2>{{ chaise.nom }}</h2>
+    <p>Ajoutée le : {{ chaise.dateAjout|date('d/m/Y') }}</p>
+    <p>{{ chaise.description }}</p>
+    <p>Type : {{ chaise.type.nom }}</p>
+    <p>Valeur estimée : {{ chaise.valeurEstimee }} €</p>
+
+    {% if chaise.imageName %}
+        <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="{{ chaise.nom }}" style="max-width: 400px;">
+    {% endif %}
+
+{% endblock %}
