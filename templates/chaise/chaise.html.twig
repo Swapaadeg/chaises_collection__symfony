@@ -4,6 +4,14 @@
 
 {% block body %}
     <h2>{{ chaise.nom }}</h2>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <p>Ajoutée le : {{ chaise.dateAjout|date('d/m/Y') }}</p>
     <p>{{ chaise.description }}</p>
     <p>Type : {{ chaise.type.nom }}</p>
@@ -12,5 +20,14 @@
     {% if chaise.imageName %}
         <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="{{ chaise.nom }}" style="max-width: 400px;">
     {% endif %}
+
+    <div class="card-actions">
+        <a class="modify-a" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</a>
+        <form class="form-delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_chaise', { id: chaise.id }) }}">
+            <input type="hidden" name="_method" value="delete">
+            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ chaise.id) }}">
+            <button class="delete-btn" type="submit">Supprimer</button>
+        </form>
+    </div>
 
 {% endblock %}

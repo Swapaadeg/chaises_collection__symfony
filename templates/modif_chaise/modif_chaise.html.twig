@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier la chaise {% endblock %}
+
+{% block body %}
+    <h2>Modifier une chaise</h2>
+    {{ form_start (chaiseForm)}}
+    {# NOM CHAISE  #}
+    <div class="form-group">
+        {{ form_row(chaiseForm.nom, {
+            'label' : 'Nom de la chaise',
+            'label_attr' : {'class' : 'form-label'},
+            'attr': { 'placeholder': 'Entrez le nom de votre chaise', 'class': 'form-input'}
+        }) }}
+    </div>
+    {# TYPE  #}
+    <div class="form-group">
+        {{ form_row(chaiseForm.type, {
+            'label' : 'Le type de votre chaise',
+            'label_attr' : {'class' : 'form-label'},
+            'attr': { 'class': 'form-input'}
+        }) }}
+    </div>
+    {# DESCRIPTION  #}
+    <div class="form-group">
+        {{ form_row(chaiseForm.description, {
+            'label' : 'Entrez une description',
+            'label_attr' : {'class' : 'form-label'},
+            'attr': { 'class': 'form-input'}
+        }) }}
+    </div>
+    {# VALEUR ESTIMEE  #}
+    <div class="form-group">
+        {{ form_row(chaiseForm.valeur_estimee, {
+            'label' : 'Valeur estimée (€)',
+            'label_attr' : {'class' : 'form-label'},
+            'attr': { 'class': 'form-input' }
+        }) }}
+    </div>
+
+        {{ form_widget (chaiseForm)}}
+        <button>{{ isModification ? 'Modifier' : 'Ajouter' }} la chaise</button>
+    {{ form_end (chaiseForm)}}
+{% endblock %}
