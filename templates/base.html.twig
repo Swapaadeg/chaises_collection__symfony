@@ -15,15 +15,17 @@
                 <li><a href={{path('home')}}>Accueil</a></li>
                 <li><a href={{path('gallerie')}}>Galerie</a></li>
                 {% if is_granted('ROLE_USER') %}
-                <li><a href={{path('add_chaise')}}>Ajouter une chaise</a></li>
-                <li><a href={{path('logout')}}>Se déconnecter</a></li>
+                    <li><a href={{path('add_chaise')}}>Ajouter une chaise</a></li>
+                    <li><a href={{path('logout')}}>Se déconnecter</a></li>
                 {% endif %}   
-                <li><a href={{path('contact')}}>Contact</a></li>
+                    <li><a href={{path('contact')}}>Contact</a></li>
                 {% if not is_granted('ROLE_USER') %}
-                <li><a href={{path('login')}}>Se connecter</a></li>
-                <li><a href={{path('inscription')}}>S'inscrire</a></li>
+                    <li><a href={{path('login')}}>Se connecter</a></li>
+                    <li><a href={{path('inscription')}}>S'inscrire</a></li>
                 {% endif %}
-                {# <li><a href={{path('admin')}}>Pannel Admin</a></li> #}
+                {% if is_granted('ROLE_ADMIN')%}
+                    <li><a href={{path('admin')}} target="_blank">Pannel Admin</a></li>
+                {% endif %}
             </ul>
         </nav>
         <main>
