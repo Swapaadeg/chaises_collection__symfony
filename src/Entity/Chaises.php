@@ -51,6 +51,9 @@ class Chaises
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'chaises')]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->commentaire = new ArrayCollection();
@@ -181,5 +184,17 @@ class Chaises
     public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

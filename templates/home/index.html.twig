@@ -3,5 +3,33 @@
 {% block title %}Bienvenue chez Tenebrae Thronum{% endblock %}
 
 {% block body %}
-    <h1>Baroque</h1>
+    <h1>Tenebrae Thronum</h1>
+
+    {% if app.user %}
+        <h3>Bonjour {{ app.user.username }} !</h3>
+    {% else %}
+        <h3>Bienvenue sur le site</h3>
+    {% endif %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <h3>Nos dernieres chaises</h3>
+    <div class="chaises-container">
+    {% for chaise in lastChaises %}
+        <div class="chaise-card">
+            <h3>{{ chaise.nom }}</h3>
+            <p>{{ chaise.description|length > 250 ? chaise.description|slice(0, 100) ~ '...' : chaise.description }}</p>
+            <p><strong>Type :</strong> {{ chaise.type.nom }}</p>
+            {% if chaise.imageName %}
+                <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="Image de {{ chaise.nom }}" class="chaise-image">
+            {% endif %}
+            <a href="{{ path('chaise', { id: chaise.id }) }}">Voir plus</a>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

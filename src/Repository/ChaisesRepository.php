@@ -16,6 +16,15 @@ class ChaisesRepository extends ServiceEntityRepository
         parent::__construct($registry, Chaises::class);
     }
 
+    public function findLast4(): array
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.date_ajout', 'DESC')
+            ->setMaxResults(4)
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Chaises[] Returns an array of Chaises objects
     //     */
