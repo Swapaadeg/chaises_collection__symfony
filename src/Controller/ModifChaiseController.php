@@ -30,6 +30,9 @@ final class ModifChaiseController extends AbstractController
         $form->handleRequest($request);
         // Vérification si le formulaire est soumis et Valide
         if($form->isSubmitted() && $form->isValid()){
+
+            $chaise->setLastModifiedAt(new \DateTime());
+            $chaise->setModifiedBy($this->getUser());
             // Persistance des données
             $entityManager->persist($chaise);
             // Envoi en BDD

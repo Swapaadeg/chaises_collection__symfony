@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use Vich\UploadableField;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ChaisesRepository;
 use Doctrine\Common\Collections\Collection;
@@ -32,11 +31,18 @@ class Chaises
     #[ORM\Column]
     private ?int $valeur_estimee = null;
 
+    #[ORM\ManyToOne(inversedBy: 'modifications')]
+    private ?User $modifiedBy = null;
+
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $lastModifiedAt = null;
+
+
     /**
      * @var Collection<int, Commentaires>
      */
     #[ORM\OneToMany(targetEntity: Commentaires::class, mappedBy: 'chaises')]
-    private Collection $commentaire;
+    private Collection $commentaires;
 
     #[ORM\ManyToOne(inversedBy: 'chaises')]
     private ?TypeDeChaise $type = null;
@@ -56,7 +62,7 @@ class Chaises
 
     public function __construct()
     {
-        $this->commentaire = new ArrayCollection();
+        $this->commentaires = new ArrayCollection();
         $this->date_ajout = new \DateTime(); // ✅ initialisation automatique de la date
     }
 
@@ -116,24 +122,24 @@ class Chaises
     /**
      * @return Collection<int, Commentaires>
      */
-    public function getCommentaire(): Collection
+    public function getCommentaires(): Collection
     {
-        return $this->commentaire;
+        return $this->commentaires;
     }
 
-    public function addCommentaire(Commentaires $commentaire): static
+    public function addCommentaires(Commentaires $commentaire): static
     {
-        if (!$this->commentaire->contains($commentaire)) {
-            $this->commentaire->add($commentaire);
+        if (!$this->commentaires->contains($commentaire)) {
+            $this->commentaires->add($commentaire);
             $commentaire->setChaises($this);
         }
 
         return $this;
     }
 
-    public function removeCommentaire(Commentaires $commentaire): static
+    public function removeCommentaires(Commentaires $commentaire): static
     {
-        if ($this->commentaire->removeElement($commentaire)) {
+        if ($this->commentaires->removeElement($commentaire)) {
             if ($commentaire->getChaises() === $this) {
                 $commentaire->setChaises(null);
             }
@@ -160,6 +166,28 @@ class Chaises
         if ($imageFile) {
             $this->updatedAt = new \DateTimeImmutable();
         }
+    }
+
+    public function getLastModifiedAt(): ?\DateTimeInterface
+    {
+        return $this->lastModifiedAt;
+    }
+
+    public function setLastModifiedAt(?\DateTimeInterface $lastModifiedAt): static
+    {
+        $this->lastModifiedAt = $lastModifiedAt;
+        return $this;
+    }
+
+    public function getModifiedBy(): ?User
+    {
+    return $this->modifiedBy;
+    }
+
+    public function setModifiedBy(?User $modifiedBy): static
+    {
+        $this->modifiedBy = $modifiedBy;
+        return $this;
     }
 
     //IMAGES
