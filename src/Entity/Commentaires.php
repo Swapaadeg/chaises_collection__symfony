@@ -20,6 +20,9 @@ class Commentaires
     #[ORM\Column(type: Types::TEXT)]
     private ?string $texte = null;
 
+    #[ORM\ManyToOne(inversedBy: 'commentaire')]
+    private ?Chaises $chaises = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,6 +48,18 @@ class Commentaires
     public function setTexte(string $texte): static
     {
         $this->texte = $texte;
+
+        return $this;
+    }
+
+    public function getChaises(): ?Chaises
+    {
+        return $this->chaises;
+    }
+
+    public function setChaises(?Chaises $chaises): static
+    {
+        $this->chaises = $chaises;
 
         return $this;
     }

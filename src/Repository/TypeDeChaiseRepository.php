@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Types;
+use App\Entity\TypeDeChaise;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Types>
+ * @extends ServiceEntityRepository<TypeDeChaise>
  */
-class TypesRepository extends ServiceEntityRepository
+class TypeDeChaiseRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Types::class);
+        parent::__construct($registry, TypeDeChaise::class);
     }
 
     //    /**
-    //     * @return Types[] Returns an array of Types objects
+    //     * @return TypeDeChaise[] Returns an array of TypeDeChaise objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +31,7 @@ class TypesRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Types
+    //    public function findOneBySomeField($value): ?TypeDeChaise
     //    {
     //        return $this->createQueryBuilder('t')
     //            ->andWhere('t.exampleField = :val')
