@@ -63,7 +63,7 @@ class Chaises
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
-        $this->date_ajout = new \DateTime(); // ✅ initialisation automatique de la date
+        $this->date_ajout = new \DateTime();
     }
 
     public function getId(): ?int
