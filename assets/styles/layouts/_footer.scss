@@ -1,0 +1,11 @@
+@use '../abstracts/variables' as v;
+
+footer {
+    text-align: center;
+    color: v.$color-gold;
+    font-family: v.$font-footer;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid v.$color-text-fonces;
+    padding: 1rem 2rem;
+}

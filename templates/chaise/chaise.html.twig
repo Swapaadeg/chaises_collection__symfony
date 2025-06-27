@@ -3,68 +3,69 @@
 {% block title %}{{ chaise.nom }}{% endblock %}
 
 {% block body %}
-
-    {# Chaise description ++ #}
-    <h3>{{ chaise.nom }}</h3>
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="flash-{{ label }}">
-                {{ message }}
-            </div>
+    <section class="chaise__wrapper">
+        {# Chaise description ++ #}
+        <h3>{{ chaise.nom }}</h3>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-    <p>Ajoutée le : {{ chaise.dateAjout|date('d/m/Y') }}</p>
-    <p>{{ chaise.description }}</p>
-    <p>Type : {{ chaise.type.nom }}</p>
-    <p>Valeur estimée : {{ chaise.valeurEstimee }} €</p>
+        <p>Ajoutée le : {{ chaise.dateAjout|date('d/m/Y') }}</p>
+        <p>{{ chaise.description }}</p>
+        <p>Type : {{ chaise.type.nom }}</p>
+        <p>Valeur estimée : {{ chaise.valeurEstimee }} €</p>
 
-    {% if chaise.imageName %}
-        <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="{{ chaise.nom }}">
-    {% endif %}
+        {% if chaise.imageName %}
+            <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="{{ chaise.nom }}">
+        {% endif %}
 
-    {% if chaise.modifiedBy %}
-        <p>Modifiée par : {{ chaise.modifiedBy.username }}</p>
-    {% endif %}
+        {% if chaise.modifiedBy %}
+            <p>Modifiée par : {{ chaise.modifiedBy.username }}</p>
+        {% endif %}
 
-    {% if chaise.lastModifiedAt %}
-        <p>Dernière modification : {{ chaise.lastModifiedAt|date('d/m/Y à H:i') }}</p>
-    {% endif %}
-    {# Boutons modifier et supprimer  #}
-    {% if app.user %}
-        <div class="card-actions">
-            <a class="modify-a" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</a>
-            <form class="form-delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_chaise', { id: chaise.id }) }}">
-                <input type="hidden" name="_method" value="delete">
-                <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ chaise.id) }}">
-                <button class="delete-btn" type="submit">Supprimer</button>
-            </form>
-        </div>
-    {% endif %}
-    {# Les commentaires  #}
-    <h3>Espace commentaires</h3>
-
-    {% if chaise.commentaires|length > 0 %}
-        {% for commentaire in chaise.commentaires %}
-            <div class="commentaire">
-                <p>{{ commentaire.texte }}</p>
-                <small>
-                    Posté par {{ commentaire.user.username }} le {{ commentaire.date|date('d/m/Y') }}
-                </small>
+        {% if chaise.lastModifiedAt %}
+            <p>Dernière modification : {{ chaise.lastModifiedAt|date('d/m/Y à H:i') }}</p>
+        {% endif %}
+        {# Boutons modifier et supprimer  #}
+        {% if app.user %}
+            <div class="card-actions">
+                <button class="btn" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</button>
+                <form class="form-delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_chaise', { id: chaise.id }) }}">
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ chaise.id) }}">
+                    <button class="btn" type="submit">Supprimer</button>
+                </form>
             </div>
-        {% endfor %}
-    {% else %}
-        <p>Aucun commentaire pour cette chaise pour le moment.</p>
-    {% endif %}
+        {% endif %}
+        {# Les commentaires  #}
+        <h3>Espace commentaires</h3>
+
+        {% if chaise.commentaires|length > 0 %}
+            {% for commentaire in chaise.commentaires %}
+                <div class="commentaire">
+                    <p>{{ commentaire.texte }}</p>
+                    <small>
+                        Posté par {{ commentaire.user.username }} le {{ commentaire.date|date('d/m/Y') }}
+                    </small>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun commentaire pour cette chaise pour le moment.</p>
+        {% endif %}
 
 
-    <h3>Ajouter un commentaire</h3>
-    {# Formulaire pour ajouter un commentaire  #}
-    {% if app.user %}
-        {{ form_start(commentaireForm) }}
-            {{ form_row(commentaireForm.texte) }}
-            {{ form_row(commentaireForm.submit) }}
-        {{ form_end(commentaireForm) }}
-    {% else %}
-        <p><a href="{{ path('login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
-    {% endif %}
+        <h3>Ajouter un commentaire</h3>
+        {# Formulaire pour ajouter un commentaire  #}
+        {% if app.user %}
+            {{ form_start(commentaireForm) }}
+                {{ form_row(commentaireForm.texte) }}
+                {{ form_row(commentaireForm.submit) }}
+            {{ form_end(commentaireForm) }}
+        {% else %}
+            <p><a class="connexion"href="{{ path('login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+        {% endif %}
+    </section>
 {% endblock %}

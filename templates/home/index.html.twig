@@ -14,17 +14,21 @@
         {% endfor %}
     {% endfor %}
 
-    <h3>Nos dernieres chaises</h3>
+    <section class="description__wrapper">
+        <p><span class="title-span">Tenebrae Thronum</span> est une plateforme dédiée aux passionnés de chaises baroques et gothiques. Venez explorer une galerie riche en pièces rares, ajouter votre collection, et partager votre passion avec une communauté tout aussi fascinée par l'esthétique noble et sombre de ces assises d'exception. Un lieu unique pour exposer, admirer et célébrer l'art du siège avec intensité et élégance.</p>
+    </section>
+
+    <h3>Les dernieres chaises ajoutées</h3>
     <div class="chaises-container">
         {% for chaise in lastChaises %}
             <div class="chaise-card">
                 <h3>{{ chaise.nom }}</h3>
-                <p>{{ chaise.description|length > 250 ? chaise.description|slice(0, 100) ~ '...' : chaise.description }}</p>
-                <p><strong>Type :</strong> {{ chaise.type.nom }}</p>
                 {% if chaise.imageName %}
                     <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="Image de {{ chaise.nom }}" class="chaise-image">
                 {% endif %}
-                <a href="{{ path('chaise', { id: chaise.id }) }}">Voir plus</a>
+                <p>{{ chaise.description|length > 0 ? chaise.description|slice(0, 150) ~ '...' : chaise.description }}</p>
+                <p><strong>Type :</strong> {{ chaise.type.nom }}</p>
+                <a class="btn" href="{{ path('chaise', { id: chaise.id }) }}">Voir plus</a>
             </div>
         {% endfor %}
     </div>

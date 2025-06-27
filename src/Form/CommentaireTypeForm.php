@@ -24,6 +24,9 @@ class CommentaireTypeForm extends AbstractType
         ])
         ->add('submit', SubmitType::class, [
             'label' => 'Envoyer',
+            'attr' => [
+                'class' => 'btn'
+            ]
         ]);
     }
 

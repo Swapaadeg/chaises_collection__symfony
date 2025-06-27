@@ -1,0 +1,88 @@
+@use '../abstracts/variables' as v;
+
+
+.chaise__wrapper {
+    background: linear-gradient(to top, v.$color-gold 5%, v.$color-text-clair 80%);
+    border-radius: 12px;
+    padding: 4rem;
+    margin: 4rem auto;
+    max-width: 1000px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    color: v.$color-text-fonces;
+    font-family: v.$font-primary;
+
+    h3 {
+        font-family: v.$font-h3;
+        color: v.$color-text-fonces;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+        color: v.$color-text-fonces;
+    }
+
+    img {
+        max-width: 300px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        margin: 2rem auto;
+        display: block;
+    }
+
+    .card-actions {
+        display: flex;
+        flex-direction: column;
+        margin: 2rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .commentaire {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(4px);
+        border-left: 4px solid v.$color-gold;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        text-align: left;
+
+        p {
+        font-style: italic;
+        }
+
+        small {
+        display: block;
+        text-align: right;
+        color: v.$color-text-fonces;
+        font-size: 0.9rem;
+        }
+    }
+    
+    form {
+        textarea {
+        width: 100%;
+        min-height: 100px;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid v.$color-text-fonces;
+        resize: vertical;
+        background-color: rgba(110, 89, 89, 0.274);
+        }
+
+        .btn {
+        margin-top: 1rem;
+        }
+    }
+
+    .connexion{
+        color: v.$color-red;
+
+        &:hover {
+        text-decoration: underline;
+        }
+    }
+}
