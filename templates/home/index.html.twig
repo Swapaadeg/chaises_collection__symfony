@@ -3,17 +3,18 @@
 {% block title %}Bienvenue chez Tenebrae Thronum{% endblock %}
 
 {% block body %}
-    <h1>Tenebrae Thronum</h1>
-    <h2>Là où l’ombre épouse le velours</h2>
+    <header>
+        <h1>Tenebrae Thronum</h1>
+        <h2>Là où l’ombre épouse le velours</h2>
 
-    {% for label, messages in app.flashes %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}">
-                {{ message }}
-            </div>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-
+    </header>
     <section class="description__wrapper">
         <p><span class="title-span">Tenebrae Thronum</span> est une plateforme dédiée aux passionnés de chaises baroques et gothiques. Venez explorer une galerie riche en pièces rares, ajouter votre collection, et partager votre passion avec une communauté tout aussi fascinée par l'esthétique noble et sombre de ces assises d'exception. Un lieu unique pour exposer, admirer et célébrer l'art du siège avec intensité et élégance.</p>
     </section>

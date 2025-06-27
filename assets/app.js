@@ -10,3 +10,13 @@ import './styles/app.scss';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
+
+document.addEventListener('DOMContentLoaded', function () {
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('nav-links');
+
+    burger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        burger.classList.toggle('open');
+    });
+});

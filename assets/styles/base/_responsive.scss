@@ -1,0 +1,45 @@
+@media screen and (max-width: 1400px) {
+   
+   //card
+    .chaises-container {
+        flex-direction: column;
+        .chaise-card {
+            width: 100%;
+        }
+    }
+    main {
+        padding: 2rem;
+        padding-top: 8rem;
+    }
+    nav .main-nav {
+        display: none;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.8);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+    }
+    
+    .main-nav.active {
+        display: flex;
+        margin-right: 0;
+    }
+    
+    .burger {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    //navbar
+
+    //description
+    .description__wrapper {
+        p {
+            width: 100%;
+        }
+    }
+}

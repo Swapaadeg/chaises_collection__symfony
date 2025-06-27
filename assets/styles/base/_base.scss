@@ -29,7 +29,7 @@ h1 {
 }
 
 h2 {
-    font-size: 1rem;
+    font-size: 2rem;
     font-family: v.$font-h3;
     color: v.$color-text-clair;
     margin-top: -1rem;
@@ -45,4 +45,18 @@ h3 {
 .logo-link {
   display: block;
   width: 100px;
+}
+
+.flash-success {
+    background-color: rgba(202, 96, 46, 0.2);
+    border-left: 5px solid #C9A74E;
+    color: v.$color-text-clair;
+    padding: 1rem 1.5rem;
+    margin: 1rem auto;
+    border-radius: 8px;
+    font-weight: bold;
+    max-width: 800px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    font-family: v.$font-h3;
+    text-align: center;
 }
