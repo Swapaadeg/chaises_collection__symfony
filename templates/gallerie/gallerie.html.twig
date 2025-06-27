@@ -4,6 +4,7 @@
 
 {% block body %}
     <h2>Galerie de nos chaises</h2>
+    {# SUCCESS #}
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class="flash-{{ label }}">
@@ -16,11 +17,11 @@
             <div class="chaise-card">
                 <h2>{{ chaise.nom }}</h2>
                 {% set desc = chaise.description %}
-                <p class="description">
-                    {{ desc|length > 20 ? desc|slice(0, 250) ~ '...' : desc }}
-                </p>
-                <p class="type">Type : {{ chaise.type.nom }}</p>
-                <a href="{{ path('chaise', { id: chaise.id }) }}">Voir plus</a>
+                    <p class="description">
+                        {{ desc|length > 20 ? desc|slice(0, 250) ~ '...' : desc }}
+                    </p>
+                    <p class="type">Type : {{ chaise.type.nom }}</p>
+                    <a href="{{ path('chaise', { id: chaise.id }) }}">Voir plus</a>
                 {% if chaise.imageName %}
                     <img src="{{ asset('uploads/images/' ~ chaise.imageName) }}" alt="Image de {{ chaise.nom }}" class="chaise-image">
                 {% endif %}

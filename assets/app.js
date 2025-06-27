@@ -9,3 +9,4 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles/app.scss';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+

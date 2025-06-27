@@ -5,39 +5,38 @@
 {% block body %}
     <h2>Ajouter une chaise</h2>
     {{ form_start (addChaiseForm)}}
-    {# NOM CHAISE  #}
-    <div class="form-group">
-        {{ form_row(addChaiseForm.nom, {
-            'label' : 'Nom de la chaise',
-            'label_attr' : {'class' : 'form-label'},
-            'attr': { 'placeholder': 'Entrez le nom de votre chaise', 'class': 'form-input'}
-        }) }}
-    </div>
-    {# TYPE  #}
-    <div class="form-group">
-        {{ form_row(addChaiseForm.type, {
-            'label' : 'Le type de votre chaise',
-            'label_attr' : {'class' : 'form-label'},
-            'attr': { 'class': 'form-input'}
-        }) }}
-    </div>
-    {# DESCRIPTION  #}
-    <div class="form-group">
-        {{ form_row(addChaiseForm.description, {
-            'label' : 'Entrez une description',
-            'label_attr' : {'class' : 'form-label'},
-            'attr': { 'class': 'form-input'}
-        }) }}
-    </div>
-    {# VALEUR ESTIMEE  #}
-    <div class="form-group">
-        {{ form_row(addChaiseForm.valeur_estimee, {
-            'label' : 'Valeur estimée (€)',
-            'label_attr' : {'class' : 'form-label'},
-            'attr': { 'class': 'form-input' }
-        }) }}
-    </div>
-
+        {# NOM CHAISE  #}
+        <div class="form-group">
+            {{ form_row(addChaiseForm.nom, {
+                'label' : 'Nom de la chaise',
+                'label_attr' : {'class' : 'form-label'},
+                'attr': { 'placeholder': 'Entrez le nom de votre chaise', 'class': 'form-input'}
+            }) }}
+        </div>
+        {# TYPE  #}
+        <div class="form-group">
+            {{ form_row(addChaiseForm.type, {
+                'label' : 'Le type de votre chaise',
+                'label_attr' : {'class' : 'form-label'},
+                'attr': { 'class': 'form-input'}
+            }) }}
+        </div>
+        {# DESCRIPTION  #}
+        <div class="form-group">
+            {{ form_row(addChaiseForm.description, {
+                'label' : 'Entrez une description',
+                'label_attr' : {'class' : 'form-label'},
+                'attr': { 'class': 'form-input'}
+            }) }}
+        </div>
+        {# VALEUR ESTIMEE  #}
+        <div class="form-group">
+            {{ form_row(addChaiseForm.valeur_estimee, {
+                'label' : 'Valeur estimée (€)',
+                'label_attr' : {'class' : 'form-label'},
+                'attr': { 'class': 'form-input' }
+            }) }}
+        </div>
         {{ form_widget (addChaiseForm)}}
         <button>Ajouter une chaise</button>
     {{ form_end (addChaiseForm)}}

@@ -11,26 +11,44 @@
     </head>
     <body>
         <nav>
-            <ul>
-                <li><a href={{path('home')}}>Accueil</a></li>
-                <li><a href={{path('gallerie')}}>Galerie</a></li>
-                {% if is_granted('ROLE_USER') %}
-                    <li><a href={{path('add_chaise')}}>Ajouter une chaise</a></li>
-                    <li><a href={{path('logout')}}>Se déconnecter</a></li>
-                {% endif %}   
-                    <li><a href={{path('contact')}}>Contact</a></li>
-                {% if not is_granted('ROLE_USER') %}
-                    <li><a href={{path('login')}}>Se connecter</a></li>
-                    <li><a href={{path('inscription')}}>S'inscrire</a></li>
+            <div class="left-side">
+                <a class="logo-link" href="{{ path('home') }}">
+                    <img src="{{ asset('img/logo.png') }}" alt="Logo du site">
+                </a>
+                {% if app.user %}
+                    <span class="hello">Bonjour {{ app.user.username }} !</span>
+                {% else %}
+                    <span class="hello">Bienvenue sur le site</span>
                 {% endif %}
-                {% if is_granted('ROLE_ADMIN')%}
-                    <li><a href={{path('admin')}} target="_blank">Pannel Admin</a></li>
+            </div>
+
+            <ul class="main-nav">
+                <li><a href="{{ path('home') }}">Accueil</a></li>
+                <li><a href="{{ path('gallerie') }}">Galerie</a></li>
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('add_chaise') }}">Ajouter une chaise</a></li>
+                {% endif %}
+                <li><a href="{{ path('contact') }}">Contact</a></li>
+                {% if not is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('login') }}">Se connecter</a></li>
+                    <li><a href="{{ path('inscription') }}">S'inscrire</a></li>
+                {% else %}
+                    <li><a href="{{ path('logout') }}">Se déconnecter</a></li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('admin') }}" target="_blank">Pannel Admin</a></li>
                 {% endif %}
             </ul>
         </nav>
         <main>
         {% block body %}{% endblock %}
         </main>
+
+        <footer>
+        {% block footer %}
+            <p>&copy Tenebrae Thronum - 2025</p>
+        {% endblock %}
+        </footer>
     </body>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

@@ -1,0 +1,49 @@
+@use '../abstracts/variables' as v;
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid v.$color-text-fonces;
+    padding: 1rem 2rem;
+    z-index: 10;
+
+    .left-side {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: 6rem;
+
+        .logo-link {
+            display: block;
+            width: 60px;
+
+            img {
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .hello {
+            color: v.$color-gold;
+            font-size: 1.1rem;
+        }
+    }
+    .main-nav {
+        display: flex;
+        align-items: center;
+        margin-right: 6rem;
+        gap: 2rem;
+
+        a {
+            color: v.$color-gold;
+            font-size: 1.2rem;
+        }
+    }
+}
