@@ -26,15 +26,17 @@
                         </p>
                         <p class="type"><strong>Type :</strong> {{ chaise.type.nom }}</p>
                         <a class="btn" href="{{ path('chaise', { id: chaise.id }) }}">Voir plus</a>
+                    {% if app.user and (app.user == chaise.user or is_granted('ROLE_ADMIN')) %}
 
-                    <div class="card-actions">
-                        <a class="btn" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</a>
-                        <form class="form-delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_chaise', { id: chaise.id }) }}">
-                            <input type="hidden" name="_method" value="delete">
-                            <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ chaise.id) }}">
-                            <button class="btn" type="submit">Supprimer</button>
-                        </form>
-                    </div>
+                        <div class="card-actions">
+                            <a class="btn" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</a>
+                            <form class="form-delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_chaise', { id: chaise.id }) }}">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ chaise.id) }}">
+                                <button class="btn" type="submit">Supprimer</button>
+                            </form>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

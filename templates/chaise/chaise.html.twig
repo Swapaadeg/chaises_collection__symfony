@@ -13,7 +13,13 @@
                 </div>
             {% endfor %}
         {% endfor %}
-        <p>Ajoutée le : {{ chaise.dateAjout|date('d/m/Y') }}</p>
+        <p>Ajoutée le : {{ chaise.dateAjout|date('d/m/Y') }}
+        {% if chaise.user %}
+            par {{ chaise.user.username }}
+        {% else %}
+            par un utilisateur inconnu
+        {% endif %}
+        </p>
         <p>{{ chaise.description }}</p>
         <p>Type : {{ chaise.type.nom }}</p>
         <p>Valeur estimée : {{ chaise.valeurEstimee }} €</p>
@@ -30,9 +36,9 @@
             <p>Dernière modification : {{ chaise.lastModifiedAt|date('d/m/Y à H:i') }}</p>
         {% endif %}
         {# Boutons modifier et supprimer  #}
-        {% if app.user %}
+        {% if app.user and (app.user == chaise.user or is_granted('ROLE_ADMIN')) %}
             <div class="card-actions">
-                <button class="btn" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</button>
+                <a class="btn" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</a>
                 <form class="form-delete" method="POST" onsubmit="return confirm('Confirmer la suppression ?')" action="{{ path('delete_chaise', { id: chaise.id }) }}">
                     <input type="hidden" name="_method" value="delete">
                     <input type="hidden" name="_token" value="{{ csrf_token('SUP' ~ chaise.id) }}">

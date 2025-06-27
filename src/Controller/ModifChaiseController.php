@@ -22,15 +22,17 @@ final class ModifChaiseController extends AbstractController
             $chaise = new Chaises;
         }
         
-
+        if ($chaise->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier cette chaise.');
+        }
         // Récupération du formulaire et association avec l'objet
         $form = $this->createForm(AddChaiseTypeForm::class,$chaise);
-
-        // Récupération des données POST du formulaire
+        
+        // Récupération des données POST du c
         $form->handleRequest($request);
         // Vérification si le formulaire est soumis et Valide
         if($form->isSubmitted() && $form->isValid()){
-
+            
             $chaise->setLastModifiedAt(new \DateTime());
             $chaise->setModifiedBy($this->getUser());
             // Persistance des données
@@ -41,19 +43,19 @@ final class ModifChaiseController extends AbstractController
             // Redirection de l'utilisateur
             return $this->redirectToRoute('chaise', ['id' => $chaise->getId()]);
         }
-
+        
         return $this->render('modif_chaise/modif_chaise.html.twig', [
             'chaiseForm' => $form->createView(), //envoie du formulaire en VUE
             'isModification' => $chaise->getId() !== null //Envoie d'un variable pour définir si on est en Modif ou Créa
         ]);
     }
-
+    
     #[Route('/chaise/remove/{id}', name: 'delete_chaise')]
     public function remove(Chaises $chaise, Request $request, EntityManagerInterface $entityManager)
     {
-        
-        
-
+        if ($chaise->getUser() !== $this->getUser() && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Vous ne pouvez pas supprimer cette chaise.");
+        }
         if($this->isCsrfTokenValid('SUP'.$chaise->getId(),$request->get('_token'))){
             $entityManager->remove($chaise);
             $entityManager->flush();

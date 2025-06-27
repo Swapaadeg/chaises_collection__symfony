@@ -31,12 +31,12 @@ class Chaises
     #[ORM\Column]
     private ?int $valeur_estimee = null;
 
+
     #[ORM\ManyToOne(inversedBy: 'modifications')]
     private ?User $modifiedBy = null;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $lastModifiedAt = null;
-
 
     /**
      * @var Collection<int, Commentaires>
@@ -50,16 +50,16 @@ class Chaises
      //UPLOAD DES IMAGES
     #[Vich\UploadableField(mapping: 'images', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
-
+    
     #[ORM\Column(nullable: true)]
     private ?string $imageName = null;
-
+    
     #[ORM\Column(type: 'datetime', nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
-
+    
     #[ORM\ManyToOne(inversedBy: 'chaises')]
     private ?User $user = null;
-
+    
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
@@ -118,6 +118,7 @@ class Chaises
 
         return $this;
     }
+
 
     /**
      * @return Collection<int, Commentaires>
@@ -189,6 +190,7 @@ class Chaises
         $this->modifiedBy = $modifiedBy;
         return $this;
     }
+
 
     //IMAGES
     public function getImageFile(): ?File {
