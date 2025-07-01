@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réinitialiser le mot de passe{% endblock %}
+
+{% block body %}
+    <h2>Réinitialisez votre mot de passe</h2>
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(resetForm) }}
+        {{ form_row(resetForm.plainPassword.first) }}
+        {{ form_row(resetForm.plainPassword.second) }}
+        <button class="btn">Mettre à jour le mot de passe</button>
+    {{ form_end(resetForm) }}
+{% endblock %}

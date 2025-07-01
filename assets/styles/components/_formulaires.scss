@@ -80,3 +80,27 @@ input[type="file"] {
     background-color: v.$color-gold;
     color: white;
 }
+
+
+//MDP OUBLIE
+.login-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+
+    .btn {
+        margin-right: 1rem;
+    }
+
+    .mdp {
+        font-size: 0.9rem;
+        color: v.$color-text-fonces;
+        text-decoration: underline;
+        transition: color 0.3s;
+
+        &:hover {
+            color: v.$color-red;
+        }
+    }
+}
