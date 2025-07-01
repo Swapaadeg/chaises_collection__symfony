@@ -21,23 +21,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// COOKIES 
-document.addEventListener('DOMContentLoaded', () => {
-    const banner = document.getElementById('cookie-banner');
-    const acceptBtn = document.getElementById('accept-cookies');
-    const rejectBtn = document.getElementById('reject-cookies');
 
-    if (!localStorage.getItem('cookiesConsent')) {
-        banner.style.display = 'block';
-    }
+const form = document.getElementById('filtre-form');
+const url = form.dataset.ajaxUrl;
 
-    acceptBtn.addEventListener('click', () => {
-        localStorage.setItem('cookiesConsent', 'accepted');
-        banner.style.display = 'none';
-    });
+form.addEventListener('change', function () {
+    const formData = new FormData(form);
 
-    rejectBtn.addEventListener('click', () => {
-        localStorage.setItem('cookiesConsent', 'rejected');
-        banner.style.display = 'none';
+    fetch(url, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(html => {
+        document.getElementById('liste-chaises').innerHTML = html;
     });
 });

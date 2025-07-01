@@ -35,6 +35,7 @@
         {% if chaise.lastModifiedAt %}
             <p>Dernière modification : {{ chaise.lastModifiedAt|date('d/m/Y à H:i') }}</p>
         {% endif %}
+
         {# Boutons modifier et supprimer  #}
         {% if app.user and (app.user == chaise.user or is_granted('ROLE_ADMIN')) %}
             <div class="card-actions">
@@ -46,6 +47,7 @@
                 </form>
             </div>
         {% endif %}
+        
         {# Les commentaires  #}
         <h3>Espace commentaires</h3>
 

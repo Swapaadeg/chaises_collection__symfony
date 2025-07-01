@@ -6,7 +6,9 @@ namespace App\Controller;
 
 use App\Entity\Chaises;
 use App\Entity\Commentaires;
+use App\Form\FiltresTypeForm;
 use App\Form\CommentaireTypeForm;
+use App\Repository\ChaisesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

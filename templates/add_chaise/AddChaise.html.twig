@@ -4,40 +4,62 @@
 
 {% block body %}
     <h2>Ajouter une chaise</h2>
-    {{ form_start (addChaiseForm)}}
-        {# NOM CHAISE  #}
+
+    {{ form_start(addChaiseForm) }}
+
+        {# NOM CHAISE #}
         <div class="form-group">
             {{ form_row(addChaiseForm.nom, {
-                'label' : 'Nom de la chaise',
-                'label_attr' : {'class' : 'form-label'},
-                'attr': { 'placeholder': 'Entrez le nom de votre chaise', 'class': 'form-input'}
+                label: 'Nom de la chaise',
+                label_attr: {'class': 'form-label'},
+                attr: {'placeholder': 'Entrez le nom de votre chaise', 'class': 'form-input'}
             }) }}
         </div>
-        {# TYPE  #}
+
+        {# LES TYPES #}
         <div class="form-group">
             {{ form_row(addChaiseForm.type, {
-                'label' : 'Le type de votre chaise',
-                'label_attr' : {'class' : 'form-label'},
-                'attr': { 'class': 'form-input'}
+                label: 'Le type de votre chaise',
+                label_attr: {'class': 'form-label'},
+                attr: {'class': 'form-input'}
             }) }}
         </div>
-        {# DESCRIPTION  #}
+
+        {# DESCRIPTION #}
         <div class="form-group">
             {{ form_row(addChaiseForm.description, {
-                'label' : 'Entrez une description',
-                'label_attr' : {'class' : 'form-label'},
-                'attr': { 'class': 'form-input'}
+                label: 'Entrez une description',
+                label_attr: {'class': 'form-label'},
+                attr: {'class': 'form-input'}
             }) }}
         </div>
-        {# VALEUR ESTIMEE  #}
+
+        {# VALEUR ESTIMEE #}
         <div class="form-group">
             {{ form_row(addChaiseForm.valeur_estimee, {
-                'label' : 'Valeur estimée (€)',
-                'label_attr' : {'class' : 'form-label'},
-                'attr': { 'class': 'form-input' }
+                label: 'Valeur estimée (€)',
+                label_attr: {'class': 'form-label'},
+                attr: {'class': 'form-input'}
             }) }}
         </div>
-        {{ form_widget (addChaiseForm)}}
-        <button class="btn">Ajouter une chaise</button>
-    {{ form_end (addChaiseForm)}}
+
+        {# LES COULEURS  #}
+        <div class="form-group">
+            {{ form_label(addChaiseForm.couleur, 'Couleur(s)', {'label_attr': {'class': 'form-label'}}) }}
+            <div class="checkbox-group">
+                {{ form_widget(addChaiseForm.couleur) }}
+            </div>
+        </div>
+
+        {# ADD IMAGE #}
+        <div class="form-group">
+            {{ form_row(addChaiseForm.imageFile, {
+                label: 'Ajouter une image',
+                label_attr: {'class': 'form-label'},
+                attr: {'class': 'form-input'}
+            }) }}
+        </div>
+        <button type="submit" class="btn">Ajouter une chaise</button>
+
+    {{ form_end(addChaiseForm) }}
 {% endblock %}

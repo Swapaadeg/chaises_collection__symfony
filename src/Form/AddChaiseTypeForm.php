@@ -3,11 +3,12 @@
 namespace App\Form;
 
 use App\Entity\Chaises;
+use App\Entity\Couleurs;
 use App\Entity\TypeDeChaise;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 
@@ -22,6 +23,14 @@ class AddChaiseTypeForm extends AbstractType
             ->add('type', EntityType::class, [
                 'class' => TypeDeChaise::class,
                 'choice_label' => 'nom',
+            ])
+            ->add('couleur', EntityType::class, [
+                'class' => Couleurs::class,
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'Couleur(s)',
+                'required' => false,
             ])
             ->add('imageFile', FileType::class, [
                 'required' => false,

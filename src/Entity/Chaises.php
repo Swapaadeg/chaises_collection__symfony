@@ -59,11 +59,19 @@ class Chaises
     
     #[ORM\ManyToOne(inversedBy: 'chaises')]
     private ?User $user = null;
+
+    /**
+     * @var Collection<int, Couleurs>
+     */
+    #[ORM\ManyToMany(targetEntity: Couleurs::class, inversedBy: 'chaises')]
+    private Collection $couleur;
+
     
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->date_ajout = new \DateTime();
+        $this->couleur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -224,6 +232,30 @@ class Chaises
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Couleurs>
+     */
+    public function getCouleur(): Collection
+    {
+        return $this->couleur;
+    }
+
+    public function addCouleur(Couleurs $couleur): static
+    {
+        if (!$this->couleur->contains($couleur)) {
+            $this->couleur->add($couleur);
+        }
+
+        return $this;
+    }
+
+    public function removeCouleur(Couleurs $couleur): static
+    {
+        $this->couleur->removeElement($couleur);
 
         return $this;
     }
