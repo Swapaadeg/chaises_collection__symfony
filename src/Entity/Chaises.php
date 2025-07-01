@@ -66,12 +66,19 @@ class Chaises
     #[ORM\ManyToMany(targetEntity: Couleurs::class, inversedBy: 'chaises')]
     private Collection $couleur;
 
+    /**
+     * @var Collection<int, Note>
+     */
+    #[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'chaises')]
+    private Collection $note;
+
     
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
         $this->date_ajout = new \DateTime();
         $this->couleur = new ArrayCollection();
+        $this->notes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -258,5 +265,51 @@ class Chaises
         $this->couleur->removeElement($couleur);
 
         return $this;
+    }
+
+    /**
+     * @var Collection<int, Note>
+     */
+    #[ORM\OneToMany(targetEntity: Note::class, mappedBy: 'chaises')]
+    private Collection $notes;
+
+    public function getNotes(): Collection
+    {
+        return $this->notes;
+    }
+
+    public function addNote(Note $note): static
+    {
+        if (!$this->notes->contains($note)) {
+            $this->notes->add($note);
+            $note->setChaises($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): static
+    {
+        if ($this->notes->removeElement($note)) {
+            if ($note->getChaises() === $this) {
+                $note->setChaises(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getMoyenneNotes(): ?float
+    {
+        if ($this->notes->isEmpty()) {
+            return null;
+        }
+
+        $total = 0;
+        foreach ($this->notes as $note) {
+            $total += $note->getNote();
+        }
+
+        return round($total / count($this->notes), 2);
     }
 }

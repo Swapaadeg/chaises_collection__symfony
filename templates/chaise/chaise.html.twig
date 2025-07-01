@@ -4,8 +4,42 @@
 
 {% block body %}
     <section class="chaise__wrapper">
-        {# Chaise description ++ #}
         <h3>{{ chaise.nom }}</h3>
+
+        {# LES ÉTOILES DE NOTATION ET MOYENNE #}
+        <div class="stars-form">
+            {% if app.user %}
+                <form id="note-form" method="post" action="{{ path('chaise', { id: chaise.id }) }}">
+                    {{ form_row(noteForm._token) }}
+                    <div class="rating-stars">
+                        {% set moyenneLocale = moyenne ?? 0 %}
+                        {% for i in 1..5 %}
+                            <button type="submit" name="note[note]" value="{{ i }}"
+                                class="star-btn {% if noteForm.vars.data.note is defined and noteForm.vars.data.note >= i %}active{% endif %}">
+                                ★
+                            </button>
+                        {% endfor %}
+                        <span>({{ moyenneLocale }}/5)</span>
+                    </div>
+                </form>
+            {% else %}
+            <div class="stars">
+                {% for i in 1..5 %}
+                    {% if moyenne >= i %}
+                        <span class="star active">★</span>
+                    {% elseif moyenne >= i - 0.5 %}
+                        <span class="star half">☆</span>
+                    {% else %}
+                        <span class="star">✩</span>
+                    {% endif %}
+                {% endfor %}
+                <span>({{ moyenne }}/5)</span>
+            </div>
+                <p><a href="{{ path('login') }}">Connectez-vous</a> pour noter cette chaise.</p>
+            {% endif %}
+        </div>
+
+        {# MESSAGE FLASH #}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="flash-{{ label }}">
@@ -13,13 +47,15 @@
                 </div>
             {% endfor %}
         {% endfor %}
+
         <p>Ajoutée le : {{ chaise.dateAjout|date('d/m/Y') }}
-        {% if chaise.user %}
-            par {{ chaise.user.username }}
-        {% else %}
-            par un utilisateur inconnu
-        {% endif %}
+            {% if chaise.user %}
+                par {{ chaise.user.username }}
+            {% else %}
+                par un utilisateur inconnu
+            {% endif %}
         </p>
+
         <p>{{ chaise.description }}</p>
         <p>Type : {{ chaise.type.nom }}</p>
         <p>Valeur estimée : {{ chaise.valeurEstimee }} €</p>
@@ -36,7 +72,6 @@
             <p>Dernière modification : {{ chaise.lastModifiedAt|date('d/m/Y à H:i') }}</p>
         {% endif %}
 
-        {# Boutons modifier et supprimer  #}
         {% if app.user and (app.user == chaise.user or is_granted('ROLE_ADMIN')) %}
             <div class="card-actions">
                 <a class="btn" href="{{ path('modif_chaise', { id: chaise.id }) }}">Modifier</a>
@@ -47,8 +82,7 @@
                 </form>
             </div>
         {% endif %}
-        
-        {# Les commentaires  #}
+
         <h3>Espace commentaires</h3>
 
         {% if chaise.commentaires|length > 0 %}
@@ -64,16 +98,14 @@
             <p>Aucun commentaire pour cette chaise pour le moment.</p>
         {% endif %}
 
-
         <h3>Ajouter un commentaire</h3>
-        {# Formulaire pour ajouter un commentaire  #}
         {% if app.user %}
             {{ form_start(commentaireForm) }}
                 {{ form_row(commentaireForm.texte) }}
                 {{ form_row(commentaireForm.submit) }}
             {{ form_end(commentaireForm) }}
         {% else %}
-            <p><a class="connexion"href="{{ path('login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
+            <p><a class="connexion" href="{{ path('login') }}">Connectez-vous</a> pour laisser un commentaire.</p>
         {% endif %}
     </section>
 {% endblock %}

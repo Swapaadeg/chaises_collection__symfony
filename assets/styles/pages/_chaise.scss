@@ -86,3 +86,62 @@
         }
     }
 }
+
+.chaise__wrapper #note-form {
+    all: unset;
+    display: block;
+}
+
+
+.rating-stars {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.star-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0;
+}
+
+.star-btn.active {
+    color: #f5c518;
+}
+
+.star-btn:hover,
+.star-btn:focus {
+    color: #f5c518;
+    outline: none;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.stars .star {
+    font-size: 1.8rem;
+    color: #ccc;
+}
+
+.stars .star.active {
+    color: #f5c518;
+}
+
+.stars .star.half {
+    color: #f5e291;
+}
+
+.stars span {
+    font-size: 1rem;
+    color: #666;
+    margin-left: 0.4rem;
+}
