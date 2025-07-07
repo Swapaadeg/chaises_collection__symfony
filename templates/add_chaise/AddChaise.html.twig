@@ -43,14 +43,6 @@
             }) }}
         </div>
 
-        {# LES COULEURS  #}
-        <div class="form-group">
-            {{ form_label(addChaiseForm.couleur, 'Couleur(s)', {'label_attr': {'class': 'form-label'}}) }}
-            <div class="checkbox-group">
-                {{ form_widget(addChaiseForm.couleur) }}
-            </div>
-        </div>
-
         {# ADD IMAGE #}
         <div class="form-group">
             {{ form_row(addChaiseForm.imageFile, {
