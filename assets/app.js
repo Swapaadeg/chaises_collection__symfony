@@ -22,18 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-const form = document.getElementById('filtre-form');
-const url = form.dataset.ajaxUrl;
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.rating-stars .star-btn');
 
-form.addEventListener('change', function () {
-    const formData = new FormData(form);
+    stars.forEach((star, index) => {
+        star.addEventListener('mouseenter', () => {
+            for (let i = 0; i <= index; i++) {
+                stars[i].classList.add('hover');
+            }
+        });
 
-    fetch(url, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(html => {
-        document.getElementById('liste-chaises').innerHTML = html;
+        star.addEventListener('mouseleave', () => {
+            stars.forEach(s => s.classList.remove('hover'));
+        });
     });
 });
