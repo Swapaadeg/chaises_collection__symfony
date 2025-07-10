@@ -29,7 +29,7 @@ nav {
                 transition: transform 0.9s ease;
             }
             &:hover img {
-                transform: rotate(360deg) scale(1.1);
+                transform: rotateY(180deg) scale(1.1);
                 filter: drop-shadow(0 0 8px v.$color-gold);
             }
         }

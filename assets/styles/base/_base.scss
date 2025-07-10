@@ -12,7 +12,8 @@ body {
     font-family: v.$font-primary;
     background-image: url(../../img/original-black-leather-texture-background.jpg);
     background-position: center, center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: repeat;
     margin: 0;
     padding: 0;
 }

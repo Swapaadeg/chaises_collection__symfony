@@ -25,7 +25,6 @@ class NoteTypeForm extends AbstractType
             'multiple' => false,
             'label' => 'Notez cette chaise',
             'required' => true,
-            'empty_data' => 1,
         ]);
     }
 

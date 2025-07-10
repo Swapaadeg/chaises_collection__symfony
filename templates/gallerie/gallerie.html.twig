@@ -5,6 +5,16 @@
 {% block body %}
     <section class="galerie__wrapper">
         <h2>Galerie de nos chaises</h2>
+
+        <div class="filter">
+            {# --FORMULAIRE DE FILTRE-- #}
+            {{form_start(filtreform)}} 
+                {{form_widget(filtreform)}}
+                <button class="btn">Filtrer</button>
+            {{form_end(filtreform)}}
+        </div>
+
+
         {# SUCCESS #}
         {% for label, messages in app.flashes %}
             {% for message in messages %}

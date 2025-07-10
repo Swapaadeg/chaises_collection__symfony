@@ -87,6 +87,7 @@
     }
 }
 
+//ETOILES
 .chaise__wrapper #note-form {
     all: unset;
     display: block;
@@ -144,4 +145,8 @@
     font-size: 1rem;
     color: #666;
     margin-left: 0.4rem;
+}
+
+.star-btn.hover {
+    color: #f5c518;
 }

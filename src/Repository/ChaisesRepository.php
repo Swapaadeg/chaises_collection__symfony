@@ -25,6 +25,16 @@ class ChaisesRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function filterType($name): array
+    {
+        return $this->createQueryBuilder('c')
+            ->leftJoin('c.type', 't')
+            ->andWhere('t.nom = :nom')
+            ->setParameter('nom', $name)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     //    /**
     //     * @return Chaises[] Returns an array of Chaises objects
     //     */
