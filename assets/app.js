@@ -24,16 +24,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', () => {
     const stars = document.querySelectorAll('.rating-stars .star-btn');
+    const noteInput = document.getElementById('note-value');
+    const form = document.getElementById('note-form');
+
+    let selectedValue = 0;
 
     stars.forEach((star, index) => {
+        const value = index + 1;
+
         star.addEventListener('mouseenter', () => {
-            for (let i = 0; i <= index; i++) {
-                stars[i].classList.add('hover');
-            }
+            highlightStars(value);
         });
 
         star.addEventListener('mouseleave', () => {
-            stars.forEach(s => s.classList.remove('hover'));
+            highlightStars(selectedValue);
+        });
+
+        star.addEventListener('click', () => {
+            selectedValue = value;
+            noteInput.value = value;
+            highlightStars(value);
+            form.submit();
         });
     });
+
+    function highlightStars(value) {
+        stars.forEach((star, index) => {
+            if (index < value) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    }
 });

@@ -87,66 +87,31 @@
     }
 }
 
-//ETOILES
-.chaise__wrapper #note-form {
-    all: unset;
-    display: block;
-}
-
-
-.rating-stars {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.star-btn {
-    background: none;
-    border: none;
-    font-size: 1.8rem;
+// ETOILES 
+.star-btn, .moyenne-stars .star {
+    font-size: 2rem;
     color: #ccc;
     cursor: pointer;
-    transition: color 0.2s;
+    background: none;
+    border: none;
     padding: 0;
 }
 
-.star-btn.active {
+.star-btn.hover,
+.star-btn.selected,
+.moyenne-stars .star.full {
     color: #f5c518;
 }
 
-.star-btn:hover,
-.star-btn:focus {
+.moyenne-stars .star.half::before {
+    content: "★";
     color: #f5c518;
-    outline: none;
+    position: absolute;
+    width: 50%;
+    overflow: hidden;
+    display: inline-block;
 }
-
-.stars {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.stars .star {
-    font-size: 1.8rem;
-    color: #ccc;
-}
-
-.stars .star.active {
-    color: #f5c518;
-}
-
-.stars .star.half {
-    color: #f5e291;
-}
-
-.stars span {
-    font-size: 1rem;
-    color: #666;
-    margin-left: 0.4rem;
-}
-
-.star-btn.hover {
-    color: #f5c518;
+.moyenne-stars .star {
+    position: relative;
+    display: inline-block;
 }

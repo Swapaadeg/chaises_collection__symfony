@@ -7,37 +7,36 @@
         <h3>{{ chaise.nom }}</h3>
 
         {# LES ÉTOILES DE NOTATION ET MOYENNE #}
-        <div class="stars-form">
-            {% if app.user %}
-                <form id="note-form" method="post" action="{{ path('chaise', { id: chaise.id }) }}">
-                    {{ form_row(noteForm._token) }}
-                    <div class="rating-stars">
-                        {% set moyenneLocale = moyenne ?? 0 %}
-                        {% for i in 1..5 %}
-                            <button type="submit" name="note[note]" value="{{ i }}"
-                                class="star-btn {% if noteForm.vars.data.note is defined and noteForm.vars.data.note >= i %}active{% endif %}">
-                                ★
-                            </button>
-                        {% endfor %}
-                        <span>({{ moyenneLocale }}/5)</span>
-                    </div>
-                </form>
-            {% else %}
-            <div class="stars">
+        {% if app.user %}
+            <div class="rating-stars" data-chaise-id="{{ chaise.id }}">
                 {% for i in 1..5 %}
-                    {% if moyenne >= i %}
-                        <span class="star active">★</span>
-                    {% elseif moyenne >= i - 0.5 %}
-                        <span class="star half">☆</span>
-                    {% else %}
-                        <span class="star">✩</span>
-                    {% endif %}
+                    <button type="button" class="star-btn" data-value="{{ i }}">★</button>
                 {% endfor %}
-                <span>({{ moyenne }}/5)</span>
             </div>
-                <p><a class="connexion" href="{{ path('login') }}">Connectez-vous</a> pour noter cette chaise.</p>
-            {% endif %}
+            <form id="note-form" method="post" action="{{ path('chaise', { id: chaise.id }) }}" style="display: none;">
+                <input type="hidden" name="chaise_id" value="{{ chaise.id }}">
+                <input type="hidden" name="note" id="note-value">
+            </form>
+        {% else %}
+            <p><a href="{{ path('login') }}">Connectez-vous</a> pour noter cette chaise.</p>
+        {% endif %}
+
+        {# Affichage de la moyenne #}
+        <div class="moyenne-stars">
+            {% set moyenne = moyenne ?? 0 %}
+            {% for i in 1..5 %}
+                {% set diff = moyenne - i + 1 %}
+                {% if diff >= 1 %}
+                    <span class="star full">★</span>
+                {% elseif diff >= 0.5 %}
+                    <span class="star half">★</span>
+                {% else %}
+                    <span class="star">★</span>
+                {% endif %}
+            {% endfor %}
+            <span>({{ moyenne|number_format(2) }}/5)</span>
         </div>
+
 
         {# MESSAGE FLASH #}
         {% for label, messages in app.flashes %}
@@ -56,6 +55,8 @@
             {% endif %}
         </p>
 
+
+        {# DONNEES CHAISE  #}
         <p>{{ chaise.description }}</p>
         <p>Type : {{ chaise.type.nom }}</p>
         <p>Valeur estimée : {{ chaise.valeurEstimee }} €</p>
@@ -83,6 +84,7 @@
             </div>
         {% endif %}
 
+        {# LES COMMENTAIRES  #}
         <h3>Espace commentaires</h3>
 
         {% if chaise.commentaires|length > 0 %}
@@ -98,6 +100,7 @@
             <p>Aucun commentaire pour cette chaise pour le moment.</p>
         {% endif %}
 
+        {# FORMULAIRE COMMENTAIRE  #}
         <h3>Ajouter un commentaire</h3>
         {% if app.user %}
             {{ form_start(commentaireForm) }}
