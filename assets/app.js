@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         star.addEventListener('click', () => {
+            console.log(`Étoile cliquée : ${value}`);
             selectedValue = value;
             noteInput.value = value;
             highlightStars(value);

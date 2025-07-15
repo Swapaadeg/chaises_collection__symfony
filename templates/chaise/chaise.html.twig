@@ -8,12 +8,12 @@
 
         {# LES ÉTOILES DE NOTATION ET MOYENNE #}
         {% if app.user %}
-            <div class="rating-stars" data-chaise-id="{{ chaise.id }}">
-                {% for i in 1..5 %}
-                    <button type="button" class="star-btn" data-value="{{ i }}">★</button>
-                {% endfor %}
-            </div>
-            <form id="note-form" method="post" action="{{ path('chaise', { id: chaise.id }) }}" style="display: none;">
+            <form class="note-form" id="note-form" method="post" action="{{ path('chaise', { id: chaise.id }) }}">
+                <div class="rating-stars">
+                    {% for i in 1..5 %}
+                        <button type="button" class="star-btn" data-value="{{ i }}">★</button>
+                    {% endfor %}
+                </div>
                 <input type="hidden" name="chaise_id" value="{{ chaise.id }}">
                 <input type="hidden" name="note" id="note-value">
             </form>
@@ -21,7 +21,6 @@
             <p><a href="{{ path('login') }}">Connectez-vous</a> pour noter cette chaise.</p>
         {% endif %}
 
-        {# Affichage de la moyenne #}
         <div class="moyenne-stars">
             {% set moyenne = moyenne ?? 0 %}
             {% for i in 1..5 %}
