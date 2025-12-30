@@ -52,6 +52,10 @@ DirectoryIndex index.php
     RewriteCond %{ENV:REDIRECT_STATUS} =""
     RewriteRule ^index\.php(?:/(.*)|$) %{ENV:BASE}/$1 [R=308,L]
 
+    # Exception pour le favicon et autres fichiers statiques
+    RewriteCond %{REQUEST_URI} \.(ico|png|jpg|jpeg|gif|css|js|woff|woff2|ttf|svg)$ [NC]
+    RewriteRule ^ - [L]
+
     # If the requested filename exists, simply serve it.
     # We only want to let Apache serve files and not directories.
     # Rewrite all other queries to the front controller.

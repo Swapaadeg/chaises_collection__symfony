@@ -34,7 +34,6 @@ class InscriptionTypeForm extends AbstractType
                             ],
                             'second_options' => ['label' => 'Confirmation du mot de passe'],
                     ]);
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
