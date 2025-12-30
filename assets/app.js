@@ -4,8 +4,8 @@
  * This file will be included onto the page via the importmap() Twig function,
  * which should already be in your base.html.twig.
  */
-import '@fortawesome/fontawesome-free/js/all.js';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@fortawesome/fontawesome-free';
+import '@fortawesome/fontawesome-free/css/fontawesome.min.css';
 import './styles/app.scss';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
